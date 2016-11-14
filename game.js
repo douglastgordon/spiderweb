@@ -49,6 +49,7 @@ const drawLines = (pos) => {
       context.lineTo(pos.x,pos.y);
       context.strokeStyle = '#000000';
       context.stroke();
+
       lines.push([startX, startY, pos.x, pos.y]);
     }
     i++;
@@ -59,19 +60,35 @@ const drawLines = (pos) => {
 
 const uncoverPicture = () => {
   let i = 0;
-  context.globalCompositeOperation = 'destination-out';
-  context.fillStyle = 'rgba(0, 0, 0, 0.3)';
-  while (i < circleCoords.length - 2){
 
+  while (i < circleCoords.length - 2){
+    context.globalCompositeOperation = 'destination-out';
+    context.fillStyle = 'rgba(0, 0, 0, 0.3)';
     context.beginPath();
     context.moveTo(circleCoords[i].x,circleCoords[i].y);
     context.lineTo(circleCoords[i+1].x,circleCoords[i+1].y);
     context.lineTo(circleCoords[i+2].x,circleCoords[i+2].y);
     context.fill();
+
+    context.globalCompositeOperation = 'source-over';
+    context.fillStyle = `rgba(${randRGB()}, ${randRGB()}, ${randRGB()}, 0.3)`;
+    context.beginPath();
+    context.moveTo(circleCoords[i].x,circleCoords[i].y);
+    context.lineTo(circleCoords[i+1].x,circleCoords[i+1].y);
+    context.lineTo(circleCoords[i+2].x,circleCoords[i+2].y);
+    context.fill();
+
+
+
     i++;
   }
 };
 
+const randRGB = () => {
+  const min = Math.ceil(0);
+  const max = Math.floor(255);
+  return Math.floor(Math.random() * (max - min)) + min;
+};
 
 const noLineIntersect = (x1, y1, x2, y2) => {
   let i = 0;
