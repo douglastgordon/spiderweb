@@ -2,6 +2,16 @@ const canvas = document.getElementById('canvas');
 const context = canvas.getContext('2d');
 const rect = canvas.getBoundingClientRect();
 canvas.addEventListener("click", (e) => drawCircle(e));
+
+
+//
+// const img = new Image;
+// img.src = 'forest.jpg';
+// context.fillStyle = context.createPattern('img', 'no-repeat');
+context.fillStyle = '#ffffff';
+context.fillRect(0, 0, 1000, 600);
+context.lineWidth = 1;
+
 let circleCoords = [];
 let lines = [];
 
@@ -14,33 +24,52 @@ const getMousePos = (event) => {
 };
 
 const drawCircle = (event) => {
+  context.globalCompositeOperation = 'source-over';
+
   const pos = getMousePos(event);
   const posx = pos.x;
   const posy = pos.y;
   context.fillStyle = "#000000";
   context.beginPath();
-  context.arc(posx, posy, 10, 0, 2*Math.PI);
+  context.arc(posx, posy, 2, 0, 2*Math.PI);
   context.fill();
   drawLines(pos);
 };
 
 const drawLines = (pos) => {
+  context.globalCompositeOperation = 'source-over';
+
   let i = 0;
   while (i < circleCoords.length){
     let startX = circleCoords[i].x;
     let startY = circleCoords[i].y;
-    console.log(noLineIntersect(startX, startY, pos.x, pos.y));
     if (noLineIntersect(startX, startY, pos.x, pos.y)){
       context.beginPath();
       context.moveTo(startX,startY);
       context.lineTo(pos.x,pos.y);
+      context.strokeStyle = '#000000';
       context.stroke();
       lines.push([startX, startY, pos.x, pos.y]);
     }
     i++;
   }
-  console.log("next");
   circleCoords.push(pos);
+  uncoverPicture();
+};
+
+const uncoverPicture = () => {
+  let i = 0;
+  context.globalCompositeOperation = 'destination-out';
+  context.fillStyle = 'rgba(0, 0, 0, 0.3)';
+  while (i < circleCoords.length - 2){
+
+    context.beginPath();
+    context.moveTo(circleCoords[i].x,circleCoords[i].y);
+    context.lineTo(circleCoords[i+1].x,circleCoords[i+1].y);
+    context.lineTo(circleCoords[i+2].x,circleCoords[i+2].y);
+    context.fill();
+    i++;
+  }
 };
 
 
