@@ -38,7 +38,7 @@ const drawCircle = (event) => {
 
 const drawLines = (pos) => {
   context.globalCompositeOperation = 'source-over';
-
+  let connectedPoints = [];
   let i = 0;
   while (i < circleCoords.length){
     let startX = circleCoords[i].x;
@@ -49,39 +49,46 @@ const drawLines = (pos) => {
       context.lineTo(pos.x,pos.y);
       context.strokeStyle = '#000000';
       context.stroke();
-
       lines.push([startX, startY, pos.x, pos.y]);
+      connectedPoints.push([startX, startY]);
     }
     i++;
   }
   circleCoords.push(pos);
-  uncoverPicture();
+  uncoverPicture(connectedPoints, [pos.x,pos.y]);
 };
 
-const uncoverPicture = () => {
+const uncoverPicture = (connectedPoints, pos) => {
   let i = 0;
 
-  while (i < circleCoords.length - 2){
+  while (i < connectedPoints.length - 1){
     context.globalCompositeOperation = 'destination-out';
     context.fillStyle = 'rgba(0, 0, 0, 0.3)';
     context.beginPath();
-    context.moveTo(circleCoords[i].x,circleCoords[i].y);
-    context.lineTo(circleCoords[i+1].x,circleCoords[i+1].y);
-    context.lineTo(circleCoords[i+2].x,circleCoords[i+2].y);
+    context.moveTo(connectedPoints[i][0],connectedPoints[i][1]);
+    context.lineTo(connectedPoints[i+1][0],connectedPoints[i+1][1]);
+    context.lineTo(pos[0],pos[1]);
     context.fill();
 
     context.globalCompositeOperation = 'source-over';
     context.fillStyle = `rgba(${randRGB()}, ${randRGB()}, ${randRGB()}, 0.3)`;
     context.beginPath();
-    context.moveTo(circleCoords[i].x,circleCoords[i].y);
-    context.lineTo(circleCoords[i+1].x,circleCoords[i+1].y);
-    context.lineTo(circleCoords[i+2].x,circleCoords[i+2].y);
+    context.moveTo(connectedPoints[i][0],connectedPoints[i][1]);
+    context.lineTo(connectedPoints[i+1][0],connectedPoints[i+1][1]);
+    context.lineTo(pos[0],pos[1]);
     context.fill();
-
-
-
     i++;
   }
+  // let i = 0;
+  // while (i < newLines.length - 1){
+  //   let j = i + 1;
+  //   while (j < newLines.length){
+  //
+  //     j++;
+  //   }
+  //   i++;
+  //
+  // }
 };
 
 const randRGB = () => {
