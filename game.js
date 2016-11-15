@@ -60,23 +60,26 @@ const drawLines = (pos) => {
 
 const uncoverPicture = (connectedPoints, pos) => {
   let i = 0;
-
+  connectedPoints = connectedPoints.sort();
   while (i < connectedPoints.length - 1){
-    context.globalCompositeOperation = 'destination-out';
-    context.fillStyle = 'rgba(0, 0, 0, 0.3)';
-    context.beginPath();
-    context.moveTo(connectedPoints[i][0],connectedPoints[i][1]);
-    context.lineTo(connectedPoints[i+1][0],connectedPoints[i+1][1]);
-    context.lineTo(pos[0],pos[1]);
-    context.fill();
+    if (noLineIntersect(connectedPoints[i][0],connectedPoints[i][1],connectedPoints[i+1][0],connectedPoints[i+1][1])){
+      context.globalCompositeOperation = 'destination-out';
+      context.fillStyle = 'rgba(0, 0, 0, 0.3)';
+      context.beginPath();
+      context.moveTo(connectedPoints[i][0],connectedPoints[i][1]);
+      context.lineTo(connectedPoints[i+1][0],connectedPoints[i+1][1]);
+      context.lineTo(pos[0],pos[1]);
+      context.fill();
 
-    context.globalCompositeOperation = 'source-over';
-    context.fillStyle = `rgba(${randRGB()}, ${randRGB()}, ${randRGB()}, 0.3)`;
-    context.beginPath();
-    context.moveTo(connectedPoints[i][0],connectedPoints[i][1]);
-    context.lineTo(connectedPoints[i+1][0],connectedPoints[i+1][1]);
-    context.lineTo(pos[0],pos[1]);
-    context.fill();
+      context.globalCompositeOperation = 'source-over';
+      context.fillStyle = `rgba(${randRGB()}, ${randRGB()}, ${randRGB()}, 0.3)`;
+      context.beginPath();
+      context.moveTo(connectedPoints[i][0],connectedPoints[i][1]);
+      context.lineTo(connectedPoints[i+1][0],connectedPoints[i+1][1]);
+      context.lineTo(pos[0],pos[1]);
+      context.fill();
+
+    }
     i++;
   }
   // let i = 0;
