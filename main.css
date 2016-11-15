@@ -10,11 +10,15 @@ canvas {
   /*background: url(forest.jpg);*/
   position:relative;
   z-index:20;
+  border-radius: 10px;
+
 }
 
 .img {
   position: absolute;
   z-index: 1;
+  border-radius: 10px;
+
 }
 
 #container{
