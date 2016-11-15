@@ -3,11 +3,6 @@ const context = canvas.getContext('2d');
 const rect = canvas.getBoundingClientRect();
 canvas.addEventListener("click", (e) => drawCircle(e));
 
-
-//
-// const img = new Image;
-// img.src = 'forest.jpg';
-// context.fillStyle = context.createPattern('img', 'no-repeat');
 context.fillStyle = '#ffffff';
 context.fillRect(0, 0, 1000, 600);
 context.lineWidth = 1;
@@ -60,7 +55,6 @@ const drawLines = (pos) => {
 
 const uncoverPicture = (connectedPoints, pos) => {
   let i = 0;
-  // connectedPoints = connectedPoints.sort();
   while (i < connectedPoints.length - 1){
     let j = i+1;
     while (j < connectedPoints.length){
@@ -85,16 +79,6 @@ const uncoverPicture = (connectedPoints, pos) => {
     }
     i++;
   }
-  // let i = 0;
-  // while (i < newLines.length - 1){
-  //   let j = i + 1;
-  //   while (j < newLines.length){
-  //
-  //     j++;
-  //   }
-  //   i++;
-  //
-  // }
 };
 
 const randRGB = () => {
