@@ -3,7 +3,18 @@
 body, html {
   width:100%;
   text-align: center;
-  background: #f2f6f8;
+  background: #ffd394;
+  opacity: 60%;
+  padding-top: 20px;
+
+}
+
+h1 {
+  margin: 0 auto;
+  font-size: 50px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  font-family: Khand, sans-serif;
 }
 
 canvas {
@@ -22,13 +33,14 @@ canvas {
 }
 
 #container{
+    margin-top: 300px;
     display: inline-block;
     width:1000px;
     height:600px;
     margin: 0 auto;
     background: black;
     position:relative;
-    border:5px solid black;
+    /*border:5px solid black;*/
     border-radius: 10px;
-    box-shadow: 0 5px 50px #333
+    box-shadow: 0 5px 30px #333
   }

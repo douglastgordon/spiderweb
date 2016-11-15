@@ -84,7 +84,8 @@ const uncoverPicture = (connectedPoints, pos) => {
 const randRGB = () => {
   const min = Math.ceil(0);
   const max = Math.floor(255);
-  return Math.floor(Math.random() * (max - min)) + min;
+  const randColor =  Math.floor(Math.random() * (max - min)) + min;
+  return randColor;
 };
 
 const noLineIntersect = (x1, y1, x2, y2) => {
