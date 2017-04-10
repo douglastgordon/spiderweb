@@ -1,13 +1,13 @@
 # Spiderweb
 
-###[Live] (http://www.douglasgordon.me/spiderweb/)
+### [Live](http://www.douglasgordon.me/spiderweb/)
 
 Uncovering a tranquil forest with a web of stained glass.
 
-###Screenshot:
+### Screenshot:
 ![screenshot]
 
-###Technical Details:  
+### Technical Details:  
 
 Spiderweb consists of an image overlayed with an HTML canvas. Clicking creates points. Points connect to other points as long as their connection doesn't cross another connection. The space in between points (triangles) is erased from the canvas and filled with translucent color.
 
